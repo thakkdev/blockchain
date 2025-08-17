@@ -1,4 +1,4 @@
-Note: This workspace was integrated using an AI agent as part of a prompt-engineering application. The agent assembled a minimal Hardhat + frontend MVP so you can compile, deploy, and test the `BarcodeRegistry` contract locally.
+This workspace components were integrated using an AI agent through prompt-engineering. The agent assembled a minimal Hardhat + frontend MVP so you can compile, deploy, and test the `BarcodeRegistry` contract locally.
 
 # Barcode: compile, deploy, and test
 
