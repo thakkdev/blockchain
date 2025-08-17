@@ -4,7 +4,7 @@ This workspace components were integrated using an AI agent through prompt-engin
 
 This folder contains a minimal Hardhat setup to compile and deploy `BarcodeRegistry.sol`, plus a tiny front end to test the contract locally with MetaMask.
 
-- [Barcode usage]("docs/slides.md")
+- [Barcode usage](docs/slides.md)
 ---
 
 ## Where to find compile/validation notes
