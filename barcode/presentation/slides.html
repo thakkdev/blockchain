@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Barcode Registry — Slides</title>
+  <style>
+    :root{--bg:#0f1724;--fg:#e6eef8;--accent:#4f46e5}
+    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--fg)}
+    .stage{width:100vw;height:100vh;display:flex;align-items:center;justify-content:center}
+    .slide{width:900px;height:600px;background:#fff;color:#111;border-radius:10px;padding:28px;box-shadow:0 12px 30px rgba(2,6,23,0.6);display:none;overflow:auto}
+    .slide.active{display:block}
+    header{display:flex;justify-content:space-between;align-items:center}
+    header h1{margin:0;font-size:20px}
+    .controls{margin-top:18px;display:flex;gap:8px}
+    button{background:var(--accent);color:#fff;border:none;padding:8px 12px;border-radius:6px;cursor:pointer}
+    button.secondary{background:#64748b}
+    .footer{position:fixed;left:0;right:0;bottom:14px;text-align:center;color:#94a3b8}
+    pre.cmd{background:#0b1220;color:#e6eef8;padding:12px;border-radius:6px;overflow:auto}
+    iframe.screenshot{width:100%;height:380px;border:1px solid #ddd;border-radius:6px}
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <div id="s1" class="slide active">
+      <header>
+        <h1>Barcode Registry — Overview</h1>
+        <div>Slides (HTML) — use ← → or buttons</div>
+      </header>
+      <p>A tiny local DApp for registering & verifying barcoded products. Built with:</p>
+      <ul>
+        <li>Solidity contract: <strong>BarcodeRegistry.sol</strong></li>
+        <li>Hardhat for local node & deployment</li>
+        <li>Vanilla front-end using <strong>ethers.js</strong> + MetaMask</li>
+      </ul>
+      <div class="controls">
+        <button id="prev" class="secondary">◀ Prev</button>
+        <button id="next">Next ▶</button>
+      </div>
+    </div>
+
+    <div id="s2" class="slide">
+      <header><h1>Architecture</h1><div>Browser ↔ MetaMask ↔ Hardhat RPC ↔ Contract</div></header>
+      <p>Interactive diagram (embedded):</p>
+      <iframe class="screenshot" src="../docs/architecture.html" title="Architecture diagram"></iframe>
+      <div class="controls"><button id="prev2" class="secondary">◀ Prev</button><button id="next2">Next ▶</button></div>
+    </div>
+
+    <div id="s3" class="slide">
+      <header><h1>Contract — key functions</h1><div>BarcodeRegistry.sol</div></header>
+      <ul>
+        <li><strong>addProducer(address, string)</strong> — owner-only: allow producer addresses</li>
+        <li><strong>removeProducer(address)</strong> — owner-only: revoke permission</li>
+        <li><strong>registerProduct(barcode, name, producerAddr)</strong> — onlyProducerOrOwner</li>
+        <li><strong>verifyProduct(barcode)</strong> — view: returns (exists, name, producer)</li>
+      </ul>
+      <div class="controls"><button id="prev3" class="secondary">◀ Prev</button><button id="next3">Next ▶</button></div>
+    </div>
+
+    <div id="s4" class="slide">
+      <header><h1>Front-end</h1><div>presentation/index.html + presentation/app.js</div></header>
+      <p>Features:</p>
+      <ul>
+        <li>Connect MetaMask; request switch to local Hardhat chain (31337)</li>
+        <li>Register products (owner or allowed producers)</li>
+        <li>Add / remove producers (owner UI)</li>
+        <li>Query past events to populate product & producer lists</li>
+      </ul>
+      <div class="controls"><button id="prev4" class="secondary">◀ Prev</button><button id="next4">Next ▶</button></div>
+    </div>
+
+    <div id="s5" class="slide">
+      <header><h1>How to run locally</h1><div>Quick commands</div></header>
+      <ol>
+        <li>Install dependencies (npm): <pre class="cmd">npm install</pre></li>
+        <li>Run Hardhat node: <pre class="cmd">npx hardhat node</pre></li>
+        <li>In another terminal deploy: <pre class="cmd">npx hardhat run --network localhost scripts/deploy.js</pre></li>
+        <li>Serve the front-end and open in browser (or open file): <pre class="cmd">cd presentation && python3 -m http.server 8000</pre></li>
+        <li>Open <code>http://127.0.0.1:8000</code> and connect MetaMask (import owner key if needed)</li>
+      </ol>
+      <div class="controls"><button id="prev5" class="secondary">◀ Prev</button><button id="next5">Next ▶</button></div>
+    </div>
+
+    <div id="s6" class="slide">
+      <header><h1>Notes & Links</h1><div>Files & helpers</div></header>
+      <ul>
+        <li>`contracts/BarcodeRegistry.sol`</li>
+        <li>`scripts/deploy.js`</li>
+        <li>`scripts/add_test_producer.js`</li>
+        <li>`presentation/index.html`, `presentation/app.js`</li>
+        <li>`docs/architecture.html` (embedded diagram)</li>
+        <li>`intents.txt` — run notes and MetaMask import steps</li>
+      </ul>
+      <p style="margin-top:12px;">Keyboard: ← previous, → next — or click the buttons.</p>
+      <div class="controls"><button id="prev6" class="secondary">◀ Prev</button><button id="next6">Restart ▶</button></div>
+    </div>
+
+  </div>
+
+  <div class="footer">Barcode Registry — local demo • use with Hardhat & MetaMask</div>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    let idx = 0;
+    function show(i){ slides.forEach(s=>s.classList.remove('active')); slides[(i+slides.length)%slides.length].classList.add('active'); idx=(i+slides.length)%slides.length }
+    document.getElementById('next').addEventListener('click',()=>show(idx+1));
+    document.getElementById('prev').addEventListener('click',()=>show(idx-1));
+    // per-slide controls
+    for(let n=2;n<=6;n++){
+      const p=document.getElementById('prev'+n), nx=document.getElementById('next'+n);
+      if(p) p.addEventListener('click',()=>show(idx-1));
+      if(nx) nx.addEventListener('click',()=> show(n===6?0:idx+1));
+    }
+    document.addEventListener('keydown', (e)=>{
+      if(e.key==='ArrowRight') show(idx+1);
+      if(e.key==='ArrowLeft') show(idx-1);
+    });
+  </script>
+</body>
+</html>

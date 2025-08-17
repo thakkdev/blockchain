@@ -1,0 +1,17 @@
+{
+  "name": "barcode",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "compile": "npx hardhat compile",
+    "deploy": "npx hardhat run scripts/deploy.js --network testnet"
+  },
+  "devDependencies": {
+    "hardhat": "^2.18.0",
+    "@nomiclabs/hardhat-ethers": "^2.0.6",
+    "dotenv": "^16.0.3"
+  },
+  "dependencies": {
+    "ethers": "^5.7.2"
+  }
+}

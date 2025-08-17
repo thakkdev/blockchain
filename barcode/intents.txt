@@ -1,0 +1,66 @@
+Question: What is an address/registry?
+
+Answer:
+- Address: an Ethereum 20-byte identifier (0x...) representing either an EOA (user private key) or a contract; used for identity, ownership, and sending/receiving value.
+- Registry: an on-chain mapping or contract that records associations (e.g., producers, product → owner). Implemented as mappings/structs (mapping(address=>bool), mapping(bytes32=>address), mapping(address=>ProducerStruct)).
+- Common patterns: allowlist (mapping(address=>bool)), structured registry (struct with address, name, verified), ID-keyed registry (mapping(bytes32=>address)).
+- Tradeoffs: addresses prove key control, not real-world identity; use off-chain KYC if needed. Gas cost for strings; prefer bytes32 for compact keys. Protect against key compromise with revocation/update flows; consider multisig/governance for centralized registration.
+
+How to run locally (quick MVP):
+
+1. Install Node and deps
+
+```bash
+cd barcode
+npm install
+```
+
+2. Start a local Hardhat node (in one terminal)
+
+```bash
+npx hardhat node
+```
+
+3. Compile (in another terminal)
+
+```bash
+npm run compile
+```
+
+4. Deploy to the local node
+
+```bash
+npx hardhat run scripts/deploy.js --network localhost
+```
+
+5. Serve the front end and open it in a browser (MetaMask on localhost:8545)
+
+```bash
+cd presentation
+python3 -m http.server 8000
+# open http://127.0.0.1:8000
+```
+
+6. In the UI: connect MetaMask, register (must be the deployer/owner), and verify barcodes.
+
+Notes:
+- If you deploy to a public testnet, set `RPC_URL` and `PRIVATE_KEY` in `.env` and run `npm run deploy`.
+- Update `presentation/app.js` with the deployed contract address if not deploying locally.
+
+Minimal: import local Hardhat owner private key into MetaMask (for local testing)
+
+1. Start Hardhat node (if not running):
+
+```bash
+npx hardhat node
+```
+
+2. Copy the private key for account #0 from the Hardhat node output (example form: `0xac0974be...`). This is the deployer/owner for local runs.
+
+3. In MetaMask: Account menu → Import Account → paste the private key → Import.
+
+4. Ensure MetaMask network is Localhost 8545 (RPC URL: `http://127.0.0.1:8545`, Chain ID: `31337`).
+
+5. Select the imported account in MetaMask, reload the UI, click Connect — you should now be the owner and owner-only actions will succeed.
+
+Security: only use these test keys on local development networks. Never import real/mainnet keys here.

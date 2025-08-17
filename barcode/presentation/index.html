@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>BarcodeRegistry Test UI</title>
+  <script src="./ethers.min.js"></script>
+</head>
+<body>
+  <h1>BarcodeRegistry Test UI</h1>
+  <button id="connect">Connect Wallet</button>
+  <div id="status" style="margin-top:8px;color:green"></div>
+  <div id="owner" style="margin-top:4px;color:blue"></div>
+  <h2>Register Product (owner only)</h2>
+  <input id="barcode" placeholder="barcode" />
+  <input id="name" placeholder="product name" />
+  <input id="producer" placeholder="producer address (0x...)" />
+  <label style="margin-left:8px;font-size:smaller"><input id="useMyAddress" type="checkbox" /> Use my address as producer</label>
+  <button id="register">Register</button>
+  <label style="margin-left:8px;font-size:smaller"><input id="forceEnable" type="checkbox" /> Force enable register (dev)</label>
+
+  <h3>Producer management (owner)</h3>
+  <input id="producerAddr" placeholder="producer address (0x...)" />
+  <input id="producerDisplayName" placeholder="producer display name" />
+  <button id="addProducer">Add Producer</button>
+  <button id="removeProducer">Remove Producer</button>
+
+  <h2>Verify Product</h2>
+  <input id="barcodeVerify" placeholder="barcode" />
+  <button id="verify">Verify</button>
+  <pre id="output"></pre>
+
+  <h2>On-chain Data</h2>
+  <button id="refresh">Refresh Lists</button>
+  <h3>Registered Products</h3>
+  <ul id="productsList"></ul>
+
+  <h3>Producers</h3>
+  <ul id="producersList"></ul>
+
+  <script src="app.js"></script>
+</body>
+</html>
+ 
