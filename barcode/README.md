@@ -16,12 +16,7 @@ See [Intents](intents.txt) for step-by-step local run commands, troubleshooting 
 
 # Architecture
 
-View the interactive architecture diagram in your browser:
-
-- <a href="https://github.com/thakkdev/blockchain/edit/main/barcode/docs/architecture.html" target="_blank">Architecture Overview</a>
-- <img src="./docs/architecture.svg" alt="Architecture diagram" width="900" />
-
-
+<img width="1673" height="873" alt="image" src="https://github.com/user-attachments/assets/c115fe0f-addf-4a4c-b9e9-84818675c427" />
 
 
 ---
