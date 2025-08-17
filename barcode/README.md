@@ -16,7 +16,7 @@ See [Intents](intents.txt) for step-by-step local run commands, troubleshooting 
 
 View the interactive architecture diagram in your browser:
 
-- [Architecture Overview](docs/architecture.html)
+- [Architecture Overview](https://github.com/thakkdev/blockchain/blob/main/barcode/docs/architecture.html)
 
 ---
 
