@@ -4,6 +4,8 @@ Note: This workspace was integrated using an AI agent as part of a prompt-engine
 
 This folder contains a minimal Hardhat setup to compile and deploy `BarcodeRegistry.sol`, plus a tiny front end to test the contract locally with MetaMask.
 
+- <a href="docs/slides.html" target="_blank">Barcode usage</a>
+
 ---
 
 ## Where to find compile/validation notes
@@ -16,7 +18,8 @@ See [Intents](intents.txt) for step-by-step local run commands, troubleshooting 
 
 View the interactive architecture diagram in your browser:
 
-- [Architecture Overview](https://github.com/thakkdev/blockchain/blob/main/barcode/docs/architecture.html)
+- <a href="docs/architecture.html" target="_blank">Architecture Overview</a>
+
 
 ---
 
@@ -108,9 +111,5 @@ Utility helpers in `app.js`:
 
 
 
-## Slides
 
-An HTML slide deck is available at:
-
-- `docs/slides.html` — open directly in a browser or serve the repository `docs/` folder (for example: `cd docs && python3 -m http.server 8000`).
 
