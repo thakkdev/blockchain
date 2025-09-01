@@ -1,0 +1,73 @@
+Industrial Drone DApp Intents
+=============================
+
+1. Register Drone
+   Actor: Drone wallet (any account) 
+   Contract: DroneRegistry.registerDrone(address droneAddress, string metadata)
+   Frontend: "Register Drone" form
+   Preconditions: Address not already registered; non-empty metadata
+   Result: Drone metadata stored; DroneRegistered event
+
+2. Post Task
+   Actor: Operator (deployer / operator address)
+   Contract: TaskManager.postTask(string description, uint deadline)
+   Frontend: "Post Task" section
+   Preconditions: deadline > now
+   Result: Task created with incremental taskId; TaskPosted event
+
+3. Bid For Task
+   Actor: Registered drone
+   Contract: TaskManager.bidForTask(uint taskId)
+   Frontend: "Bid as current account" button (after setting Task ID)
+   Preconditions: Task exists; caller registered; not yet assigned
+   Result: Drone appended to bidders array; TaskBid event
+
+4. Assign Task
+   Actor: Operator
+   Contract: TaskManager.assignTask(uint taskId)
+   Frontend: "Assign (operator)" button
+   Policy: Picks first bidder (current simplistic logic)
+   Result: Task assignedDrone set; TaskAssigned event
+
+5. Log Inspection Result
+   Actor: Assigned drone
+   Contract: DataLogger.logInspection(uint taskId, bytes32 dataHash)
+   (Data hash typically keccak256(content / off-chain artifact reference))
+   Result: Hash stored; InspectionLogged event
+
+6. View Assigned Drone
+   Actor: Any
+   Contract: TaskManager.getTask(uint taskId) -> (..., assignedDrone, ...)
+   Frontend: "Refresh Assigned" shows address (or none)
+
+7. View Logged Data Hash
+   Actor: Any
+   Contract: DataLogger.getLog(uint taskId) -> bytes32
+   Usage: Verifies on-chain hash vs off-chain artifact
+
+8. Mark Task Completed (Future Enhancement)
+   Actor: Assigned drone
+   Potential Contract Call: TaskManager.markCompleted(uint taskId)
+   Status: Implemented but not yet exposed in frontend
+
+9. Advanced Assignment Policy (Future)
+   Actor: Operator / Autonomous logic
+   Idea: Evaluate bidders based on metadata or external scoring; replace first-bidder selection.
+
+10. Task Listing (Future)
+    Actor: Any
+    Idea: Add indexing or events scan to enumerate tasks.
+
+Running the Service (Summary)
+-----------------------------
+1. Install backend deps: npm install
+2. Start local chain: npm run node
+3. In new terminal deploy & write frontend artifacts: npm run deploy:localhost
+4. Frontend setup: cd frontend && npm install && npm run dev
+5. Open browser (default Vite port, e.g., http://localhost:5173) and connect MetaMask to Hardhat network.
+
+Security / Dev Notes
+--------------------
+- Hardhat accounts & keys are public (do not reuse on mainnet).
+- Assignment logic is naive; not production ready.
+- No access control beyond simple operator check for posting/assigning.
