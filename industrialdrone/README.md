@@ -1,3 +1,5 @@
+This workspace components were integrated using an AI agent through prompt-engineering. The agent assembled a minimal Hardhat + frontend MVP so you can compile, deploy, and test the Industrial Drone contract locally.
+
 # Industrial Drone (Hardhat)
 
 Decentralized drone fleet prototype on a local Hardhat network.
@@ -16,7 +18,7 @@ It includes:
 
 ---
 
-## Architecture (plain)
+## Architecture 
 
 Simple diagram:
 
@@ -33,7 +35,7 @@ More detailed (ASCII):
 			 v                      |                      v
 	User wallets (MetaMask) ----+                 Events / On-chain storage
 
-Plain explanation:
+explanation:
 - Hardhat node: a local Ethereum-compatible node used for fast development and testing.
 - Contracts: small on-chain programs that handle registration, bidding, assignment and data logging.
 - Frontend: a browser UI that asks MetaMask to sign transactions and reads contract state.
